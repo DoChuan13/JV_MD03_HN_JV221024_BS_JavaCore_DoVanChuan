@@ -60,6 +60,7 @@ public class ProductManagement {
         }
         Product product = (Product) productList.get(index);
         boolean status = product.isProductStatus() ? false : true;
+        System.out.println("Thay đổi trạng thái sản phẩm thành công");
         product.setProductStatus(status);
     }
 
@@ -84,6 +85,7 @@ public class ProductManagement {
             System.out.println("Không tìm thấy giá trị hợp lệ");
             return;
         }
+        System.out.println("Xoá sản phẩm thành công");
         productList.remove(index);
     }
 
