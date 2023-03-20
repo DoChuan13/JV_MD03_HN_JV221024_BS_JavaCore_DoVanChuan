@@ -64,7 +64,8 @@ public class ProductManagement {
     private static void sortByInterest() {
         if (isEmpty()) return;
         Collections.sort(productList);
-        displayProductsListInfo();
+        System.out.println("Sắp xếp thành công!!!!");
+//        displayProductsListInfo();
     }
 
     private static void displayProductsListInfo() {
