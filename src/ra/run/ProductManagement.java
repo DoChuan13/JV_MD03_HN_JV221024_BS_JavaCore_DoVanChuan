@@ -35,10 +35,10 @@ public class ProductManagement {
                     deleteProductById();
                     break;
                 case 5:
-
+                    findProductByName();
                     break;
                 case 6:
-
+                    changeProductStatus();
                     break;
                 case 7:
                     System.exit(0);
@@ -51,24 +51,54 @@ public class ProductManagement {
         }
     }
 
+    private static void changeProductStatus() {
+        if (isEmpty()) return;
+        int index = findProductById();
+        if (index < 0) {
+            System.out.println("Không tìm thấy giá trị hợp lệ");
+            return;
+        }
+        Product product = (Product) productList.get(index);
+        boolean status = product.isProductStatus() ? false : true;
+        product.setProductStatus(status);
+    }
+
+    private static void findProductByName() {
+        if (isEmpty()) return;
+        System.out.print("Nhập tên sản phẩm: ");
+        String productName = InputMethods.getString();
+        for (int i = 0; i < productList.size(); i++) {
+            Product product = (Product) productList.get(i);
+            if (product.getProductName().equals(productName)) {
+                product.displayData();
+            } else if (i == productList.size() - 1) {
+                System.out.println("Không tìm thấy giá trị hợp lệ");
+            }
+        }
+    }
+
     private static void deleteProductById() {
         if (isEmpty()) return;
+        int index = findProductById();
+        if (index < 0) {
+            System.out.println("Không tìm thấy giá trị hợp lệ");
+            return;
+        }
+        productList.remove(index);
+    }
+
+    private static int findProductById() {
         System.out.print("Nhập mã sản phẩm: ");
         int id = InputMethods.getInteger();
-        int size = productList.size();
         int index = -1;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < productList.size(); i++) {
             Product product = (Product) productList.get(i);
             if (product.getProductId() == id) {
                 index = i;
                 break;
             }
         }
-        if (index < 0) {
-            System.out.println("Không tìm thấy giá trị hợp lệ");
-            return;
-        }
-        productList.remove(index);
+        return index;
     }
 
     private static void sortByInterest() {
