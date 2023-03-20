@@ -56,9 +56,19 @@ public class ProductManagement {
         System.out.print("Nhập mã sản phẩm: ");
         int id = InputMethods.getInteger();
         int size = productList.size();
+        int index = -1;
         for (int i = 0; i < size; i++) {
-
+            Product product = (Product) productList.get(i);
+            if (product.getProductId() == id) {
+                index = i;
+                break;
+            }
         }
+        if (index < 0) {
+            System.out.println("Không tìm thấy giá trị hợp lệ");
+            return;
+        }
+        productList.remove(index);
     }
 
     private static void sortByInterest() {
